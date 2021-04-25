@@ -22,13 +22,15 @@ function App() {
         `https://api.giphy.com/v1/gifs/${appMode}?api_key=${
           process.env.REACT_APP_API_KEY
         }&limit=9&offset=${page[appMode]}${
-          appMode === "search" ? `&q=${searchTerm}` : null
+          appMode === "search" ? `&q=${searchTerm}` : ""
         }`
       )
       .then((res) => {
         if (page[appMode] > 0) {
+          debugger;
           setData((data) => [...data, ...res.data.data]);
         } else {
+          debugger;
           setData(res.data.data);
         }
       })
@@ -47,7 +49,12 @@ function App() {
           appMode={appMode}
           setPage={setPage}
         />
-        <AppMode appMode={appMode} />
+        <AppMode
+          appMode={appMode}
+          searchTerm={searchTerm}
+          setAppMode={setAppMode}
+          setPage={setPage}
+        />
         <AlertMessage errorMessage={errorMessage} />
         <SearchResults data={data} />
         <LoadMore setPage={setPage} appMode={appMode} />

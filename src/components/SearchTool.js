@@ -29,7 +29,7 @@ export default function SearchTool({
       setAppMode("search");
     }
     setSearchTerm(userInput);
-    setPage((page) => ({ ...page, [appMode]: 0 }));
+    setPage({ trending: 0, search: 0 });
     setUserInput("");
   };
 
