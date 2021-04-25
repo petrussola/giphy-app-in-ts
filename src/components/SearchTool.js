@@ -9,12 +9,24 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 
 export default function SearchTool({
-  searchHandler,
-  searchTerm,
   setSearchTerm,
+  setAppMode,
+  appMode,
+  setPage,
 }) {
+  const [userInput, setUserInput] = useState("");
+
   const changeHandler = (e) => {
-    setSearchTerm(e.target.value);
+    setUserInput(e.target.value);
+  };
+
+  const searchHandler = () => {
+    if (appMode !== "search") {
+      setAppMode("search");
+    }
+    setSearchTerm(userInput);
+    setPage((page) => ({ ...page, [appMode]: 0 }));
+    setUserInput("");
   };
 
   return (
@@ -32,7 +44,7 @@ export default function SearchTool({
         />
         <Input
           placeholder="Type a search term"
-          value={searchTerm}
+          value={userInput}
           onChange={changeHandler}
         />
       </InputGroup>

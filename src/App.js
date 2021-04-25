@@ -10,8 +10,8 @@ import SearchTool from "./components/SearchTool";
 
 function App() {
   const [data, setData] = useState([]);
-  const [page, setPage] = useState(0);
-  const [appMode, setAddMode] = useState("Trending");
+  const [page, setPage] = useState({ trending: 0, search: 0 });
+  const [appMode, setAppMode] = useState("trending");
   const [searchTerm, setSearchTerm] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -19,61 +19,38 @@ function App() {
     setErrorMessage(null);
     axios
       .get(
-        `https://api.giphy.com/v1/gifs/trending?api_key=${process.env.REACT_APP_API_KEY}&limit=9&offset=0`
+        `https://api.giphy.com/v1/gifs/${appMode}?api_key=${
+          process.env.REACT_APP_API_KEY
+        }&limit=9&offset=${page[appMode]}${
+          appMode === "search" ? `&q=${searchTerm}` : null
+        }`
       )
       .then((res) => {
-        setData(res.data.data);
+        if (page[appMode] > 0) {
+          setData((data) => [...data, ...res.data.data]);
+        } else {
+          setData(res.data.data);
+        }
       })
       .catch((error) => {
         setErrorMessage(error.response.data.message);
       });
-  }, []);
-
-  useEffect(() => {
-    if (page > 0) {
-      axios
-        .get(
-          `https://api.giphy.com/v1/gifs/trending?api_key=${process.env.REACT_APP_API_KEY}&limit=9&offset=${page}`
-        )
-        .then((res) => {
-          setData([...data, ...res.data.data]);
-        })
-        .catch((error) => {
-          setErrorMessage(error.response.data.message);
-        });
-    }
-  }, [page]);
-
-  const loadMoreHandler = () => {
-    setPage((page) => page + 9);
-  };
-
-  const searchHandler = () => {
-    setSearchTerm("");
-    axios
-      .get(
-        `https://api.giphy.com/v1/gifs/search?api_key=${process.env.REACT_APP_API_KEY}&q=${searchTerm}&limit=9&offset=${page}`
-      )
-      .then((res) => {
-        setData(res.data.data);
-      })
-      .catch((error) => {
-        setErrorMessage(error.response.data.message);
-      });
-  };
+  }, [appMode, searchTerm, page]);
 
   return (
     <div className="App">
       <Box m="2rem" display="flex" flexDirection="column" alignItems="center">
         <SearchTool
-          searchHandler={searchHandler}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          setAppMode={setAppMode}
+          appMode={appMode}
+          setPage={setPage}
         />
         <AppMode appMode={appMode} />
         <AlertMessage errorMessage={errorMessage} />
         <SearchResults data={data} />
-        <LoadMore loadMoreHandler={loadMoreHandler} />
+        <LoadMore setPage={setPage} appMode={appMode} />
       </Box>
     </div>
   );
