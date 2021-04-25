@@ -6,6 +6,7 @@ import SearchResults from "./components/SearchResults";
 import AlertMessage from "./components/AlertMessage";
 import LoadMore from "./components/LoadMore";
 import AppMode from "./components/AppMode";
+import SearchTool from "./components/SearchTool";
 
 function App() {
   const [data, setData] = useState([]);
@@ -49,6 +50,7 @@ function App() {
   return (
     <div className="App">
       <Box m="2rem" display="flex" flexDirection="column" alignItems="center">
+        <SearchTool />
         <AppMode appMode={appMode} />
         <AlertMessage errorMessage={errorMessage} />
         <SearchResults data={data} />
