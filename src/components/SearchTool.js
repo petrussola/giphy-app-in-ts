@@ -17,7 +17,11 @@ export default function SearchTool({
   const [userInput, setUserInput] = useState("");
 
   const changeHandler = (e) => {
-    setUserInput(e.target.value);
+    if (e.code === "Enter") {
+      searchHandler();
+    } else {
+      setUserInput(e.target.value);
+    }
   };
 
   const searchHandler = () => {
@@ -46,6 +50,7 @@ export default function SearchTool({
           placeholder="Type a search term"
           value={userInput}
           onChange={changeHandler}
+          onKeyDown={changeHandler}
         />
       </InputGroup>
       <Button px="3rem" mx="0.5rem" onClick={searchHandler}>
