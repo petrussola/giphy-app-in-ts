@@ -6,6 +6,7 @@ export default function AppMode({ appMode, searchTerm, setAppMode, setPage }) {
     setAppMode("trending");
     setPage({ trending: 0, search: 0 });
   };
+
   return (
     <Box
       display="flex"
@@ -20,6 +21,7 @@ export default function AppMode({ appMode, searchTerm, setAppMode, setPage }) {
           ? "#TrendingGifs"
           : `Search results for "${searchTerm}"`
       }`}</Text>
+
       {appMode === "search" ? (
         <Button onClick={handleReturnTrending}>Return to Trending Gifs</Button>
       ) : null}

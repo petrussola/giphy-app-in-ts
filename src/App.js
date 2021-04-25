@@ -7,37 +7,38 @@ import AlertMessage from "./components/AlertMessage";
 import LoadMore from "./components/LoadMore";
 import AppMode from "./components/AppMode";
 import SearchTool from "./components/SearchTool";
+import SafeToggle from "./components/SafeToggle";
 
 function App() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState({ trending: 0, search: 0 });
   const [appMode, setAppMode] = useState("trending");
   const [searchTerm, setSearchTerm] = useState("");
+  const [safeSearch, setSafeSearch] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  const apiKey = process.env.REACT_APP_API_KEY;
+
   useEffect(() => {
+    const offSet = page[appMode];
+    const searchQueryParam = appMode === "search" ? searchTerm : "";
+    const ratingQueryParam = safeSearch ? "g" : "";
     setErrorMessage(null);
     axios
       .get(
-        `https://api.giphy.com/v1/gifs/${appMode}?api_key=${
-          process.env.REACT_APP_API_KEY
-        }&limit=9&offset=${page[appMode]}${
-          appMode === "search" ? `&q=${searchTerm}` : ""
-        }`
+        `https://api.giphy.com/v1/gifs/${appMode}?api_key=${apiKey}&limit=9&offset=${offSet}&q=${searchQueryParam}&rating=${ratingQueryParam}`
       )
       .then((res) => {
         if (page[appMode] > 0) {
-          debugger;
           setData((data) => [...data, ...res.data.data]);
         } else {
-          debugger;
           setData(res.data.data);
         }
       })
       .catch((error) => {
         setErrorMessage(error.response.data.message);
       });
-  }, [appMode, searchTerm, page]);
+  }, [appMode, searchTerm, page, apiKey, safeSearch]);
 
   return (
     <div className="App">
@@ -53,6 +54,11 @@ function App() {
           appMode={appMode}
           searchTerm={searchTerm}
           setAppMode={setAppMode}
+          setPage={setPage}
+        />
+        <SafeToggle
+          safeSearch={safeSearch}
+          setSafeSearch={setSafeSearch}
           setPage={setPage}
         />
         <AlertMessage errorMessage={errorMessage} />

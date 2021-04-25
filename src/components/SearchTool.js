@@ -5,6 +5,9 @@ import {
   Button,
   InputLeftElement,
   InputGroup,
+  FormControl,
+  FormLabel,
+  Switch,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
@@ -13,6 +16,8 @@ export default function SearchTool({
   setAppMode,
   appMode,
   setPage,
+  safeSearch,
+  setSafeSearch,
 }) {
   const [userInput, setUserInput] = useState("");
 
@@ -35,13 +40,13 @@ export default function SearchTool({
 
   return (
     <Box
-      d="flex"
-      direction="row"
+      display="flex"
+      flexDirection="row"
       justifyContent="center"
       alignItems="center"
       width="50vw"
     >
-      <InputGroup>
+      <InputGroup width="100%">
         <InputLeftElement
           pointerEvents="none"
           children={<SearchIcon color="gray.300" />}
