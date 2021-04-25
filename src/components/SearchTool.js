@@ -5,9 +5,6 @@ import {
   Button,
   InputLeftElement,
   InputGroup,
-  FormControl,
-  FormLabel,
-  Switch,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
@@ -16,8 +13,6 @@ export default function SearchTool({
   setAppMode,
   appMode,
   setPage,
-  safeSearch,
-  setSafeSearch,
 }) {
   const [userInput, setUserInput] = useState("");
 
