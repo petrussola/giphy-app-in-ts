@@ -4,16 +4,18 @@ import { Box } from "@chakra-ui/react";
 
 import SearchResults from "./components/SearchResults";
 import AlertMessage from "./components/AlertMessage";
+import LoadMore from "./components/LoadMore";
 
 function App() {
   const [data, setData] = useState([]);
+  const [page, setPage] = useState(0);
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     setErrorMessage(null);
     axios
       .get(
-        `https://api.giphy.com/v1/gifs/trending?api_key=${process.env.REACT_APP_API_KEY}`
+        `https://api.giphy.com/v1/gifs/trending?api_key=${process.env.REACT_APP_API_KEY}&limit=9&offset=${page}`
       )
       .then((res) => {
         setData(res.data.data);
@@ -22,11 +24,32 @@ function App() {
         setErrorMessage(error.response.data.message);
       });
   }, []);
+
+  useEffect(() => {
+    if (page > 0) {
+      axios
+        .get(
+          `https://api.giphy.com/v1/gifs/trending?api_key=${process.env.REACT_APP_API_KEY}&limit=9&offset=${page}`
+        )
+        .then((res) => {
+          setData([...data, ...res.data.data]);
+        })
+        .catch((error) => {
+          setErrorMessage(error.response.data.message);
+        });
+    }
+  }, [page]);
+
+  const loadMoreHandler = () => {
+    setPage((page) => page + 9);
+  };
+
   return (
     <div className="App">
-      <Box m="2rem">
+      <Box m="2rem" display="flex" flexDirection="column" alignItems="center">
         <AlertMessage errorMessage={errorMessage} />
         <SearchResults data={data} />
+        <LoadMore loadMoreHandler={loadMoreHandler} />
       </Box>
     </div>
   );
