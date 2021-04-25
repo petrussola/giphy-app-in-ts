@@ -1,7 +1,22 @@
-import React from "react";
-import { Box, Input, Button } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  Box,
+  Input,
+  Button,
+  InputLeftElement,
+  InputGroup,
+} from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
 
-export default function SearchTool() {
+export default function SearchTool({
+  searchHandler,
+  searchTerm,
+  setSearchTerm,
+}) {
+  const changeHandler = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
     <Box
       d="flex"
@@ -10,8 +25,18 @@ export default function SearchTool() {
       alignItems="center"
       width="50vw"
     >
-      <Input placeholder="Type a search term" />
-      <Button px="3rem" mx="0.5rem">
+      <InputGroup>
+        <InputLeftElement
+          pointerEvents="none"
+          children={<SearchIcon color="gray.300" />}
+        />
+        <Input
+          placeholder="Type a search term"
+          value={searchTerm}
+          onChange={changeHandler}
+        />
+      </InputGroup>
+      <Button px="3rem" mx="0.5rem" onClick={searchHandler}>
         Search
       </Button>
     </Box>

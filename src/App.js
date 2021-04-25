@@ -12,6 +12,7 @@ function App() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(0);
   const [appMode, setAddMode] = useState("Trending");
+  const [searchTerm, setSearchTerm] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
@@ -41,16 +42,34 @@ function App() {
           setErrorMessage(error.response.data.message);
         });
     }
-  }, [page, data]);
+  }, [page]);
 
   const loadMoreHandler = () => {
     setPage((page) => page + 9);
   };
 
+  const searchHandler = () => {
+    setSearchTerm("");
+    axios
+      .get(
+        `https://api.giphy.com/v1/gifs/search?api_key=${process.env.REACT_APP_API_KEY}&q=${searchTerm}&limit=9&offset=${page}`
+      )
+      .then((res) => {
+        setData(res.data.data);
+      })
+      .catch((error) => {
+        setErrorMessage(error.response.data.message);
+      });
+  };
+
   return (
     <div className="App">
       <Box m="2rem" display="flex" flexDirection="column" alignItems="center">
-        <SearchTool />
+        <SearchTool
+          searchHandler={searchHandler}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+        />
         <AppMode appMode={appMode} />
         <AlertMessage errorMessage={errorMessage} />
         <SearchResults data={data} />
