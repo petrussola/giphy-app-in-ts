@@ -6,7 +6,7 @@ export default function LoadMore({ setPage, appMode }) {
     setPage((page) => ({ ...page, [appMode]: page[appMode] + 12 }));
   };
   return (
-    <Button m="2rem" bg="gray.500" onClick={loadMoreHandler}>
+    <Button m="2rem" px="3rem" onClick={loadMoreHandler}>
       Load more..
     </Button>
   );
