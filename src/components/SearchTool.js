@@ -51,6 +51,7 @@ export default function SearchTool({
           value={userInput}
           onChange={changeHandler}
           onKeyDown={changeHandler}
+          data-testid="input-box"
         />
       </InputGroup>
       <Button px="3rem" mx="0.5rem" onClick={searchHandler}>

@@ -21,6 +21,7 @@ export default function SafeToggle({ setPage, setSafeSearch, safeSearch }) {
         id="safe-search"
         isChecked={safeSearch}
         onChange={safeChangeHandler}
+        data-testid="family-safe-toggle"
       />
     </FormControl>
   );

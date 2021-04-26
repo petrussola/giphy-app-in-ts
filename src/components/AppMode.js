@@ -16,7 +16,7 @@ export default function AppMode({ appMode, searchTerm, setAppMode, setPage }) {
       width="100%"
       pr="2rem"
     >
-      <Text fontSize="4xl" m="2rem" color="gray.500">{`${
+      <Text fontSize="4xl" m="2rem" color="gray.500" data-testid="app-mode">{`${
         appMode === "trending"
           ? "#TrendingGifs"
           : `Search results for "${searchTerm}"`
