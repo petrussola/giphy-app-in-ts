@@ -36,10 +36,12 @@ export default function SearchTool({
   return (
     <Box
       display="flex"
-      flexDirection="row"
+      flexDirection={{ base: "column", md: "column", sm: "column", lg: "row" }}
       justifyContent="center"
       alignItems="center"
-      width="50vw"
+      width={["100vw", null, null, "50vw"]}
+      mx="2rem"
+      px="2rem"
     >
       <InputGroup width="100%">
         <InputLeftElement
@@ -54,7 +56,13 @@ export default function SearchTool({
           data-testid="input-box"
         />
       </InputGroup>
-      <Button px="3rem" mx="0.5rem" onClick={searchHandler}>
+      <Button
+        px="3rem"
+        mx="0.5rem"
+        onClick={searchHandler}
+        width={{ base: "100%", sm: "100%", md: "100%", lg: "auto" }}
+        my={{ base: "1rem", sm: "1rem", md: "1rem" }}
+      >
         Search
       </Button>
     </Box>

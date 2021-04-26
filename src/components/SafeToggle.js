@@ -10,9 +10,14 @@ export default function SafeToggle({ setPage, setSafeSearch, safeSearch }) {
     <FormControl
       display="flex"
       alignItems="center"
-      justifyContent="flex-end"
+      justifyContent={{
+        base: "center",
+        sm: "center",
+        md: "center",
+        lg: "flex-end",
+      }}
       pr="2rem"
-      mb="1rem"
+      my={{ base: "2rem", sm: "2rem", md: "2rem", lg: "1rem" }}
     >
       <FormLabel htmlFor="safe-search" mb="0">
         Family Safe Results?

@@ -9,8 +9,8 @@ export default function SearchResults({ data }) {
   }
   return (
     <SimpleGrid
-      columns={[1, null, 2, null, 4]}
-      spacing={["1rem", null, "2rem", "2rem"]}
+      columns={[1, null, 2, null, 3]}
+      spacing={["1rem", null, "2rem", "2rem", null]}
     >
       {data.map((item) => {
         return <SearchItem item={item} key={item.id} />;
