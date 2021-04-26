@@ -4,8 +4,9 @@
 
 - List of trending GIFs upon loading.
 - Search feature.
-- Family safe option to filter out non G rated content.
+- Family safe option to filter out non-G rated content.
 - Button to load more items.
+- Skeleton card while gifs are being loaded.
 
 ## How to clone and run this app on your computer?
 
