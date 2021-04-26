@@ -26,7 +26,7 @@ function App() {
     setErrorMessage(null);
     axios
       .get(
-        `https://api.giphy.com/v1/gifs/${appMode}?api_key=${apiKey}&limit=9&offset=${offSet}&q=${searchQueryParam}&rating=${ratingQueryParam}`
+        `https://api.giphy.com/v1/gifs/${appMode}?api_key=${apiKey}&limit=12&offset=${offSet}&q=${searchQueryParam}&rating=${ratingQueryParam}`
       )
       .then((res) => {
         if (page[appMode] > 0) {

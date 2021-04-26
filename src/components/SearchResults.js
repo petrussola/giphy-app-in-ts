@@ -8,7 +8,10 @@ export default function SearchResults({ data }) {
     return <Spinner />;
   }
   return (
-    <SimpleGrid columns={3} spacing="2rem">
+    <SimpleGrid
+      columns={[1, null, 2, null, 4]}
+      spacing={["1rem", null, "2rem", "2rem"]}
+    >
       {data.map((item) => {
         return <SearchItem item={item} key={item.id} />;
       })}
