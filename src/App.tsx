@@ -48,7 +48,6 @@ function App() {
     <div className="App">
       <Box m="2rem" display="flex" flexDirection="column" alignItems="center">
         <SearchTool
-          // searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           setAppMode={setAppMode}
           appMode={appMode}
