@@ -8,15 +8,24 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
+import { Page, SearchEvent } from "../types";
+
+interface Props {
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+  setAppMode: React.Dispatch<React.SetStateAction<string>>;
+  appMode: string;
+  setPage: React.Dispatch<React.SetStateAction<Page>>;
+}
+
 export default function SearchTool({
   setSearchTerm,
   setAppMode,
   appMode,
   setPage,
-}) {
+}: Props) {
   const [userInput, setUserInput] = useState("");
 
-  const changeHandler = (e) => {
+  const changeHandler = (e: SearchEvent<HTMLInputElement>) => {
     if (e.code === "Enter") {
       searchHandler();
     } else {

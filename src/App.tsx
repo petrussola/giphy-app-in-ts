@@ -9,13 +9,17 @@ import AppMode from "./components/AppMode";
 import SearchTool from "./components/SearchTool";
 import SafeToggle from "./components/SafeToggle";
 
+import { GIFObject } from "giphy-api";
+
+import { Page } from "./types";
+
 function App() {
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState({ trending: 0, search: 0 });
-  const [appMode, setAppMode] = useState("trending");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [safeSearch, setSafeSearch] = useState(true);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [data, setData] = useState<GIFObject[]>([]);
+  const [page, setPage] = useState<Page>({ trending: 0, search: 0 });
+  const [appMode, setAppMode] = useState<string>("trending");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [safeSearch, setSafeSearch] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const apiKey = process.env.REACT_APP_API_KEY;
 
@@ -44,7 +48,7 @@ function App() {
     <div className="App">
       <Box m="2rem" display="flex" flexDirection="column" alignItems="center">
         <SearchTool
-          searchTerm={searchTerm}
+          // searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           setAppMode={setAppMode}
           appMode={appMode}
