@@ -6,7 +6,11 @@ import {
   AlertDescription,
 } from "@chakra-ui/react";
 
-export default function AlertMessage({ errorMessage }) {
+interface Props {
+  errorMessage: string | null;
+}
+
+export default function AlertMessage({ errorMessage }: Props) {
   if (!errorMessage) {
     return null;
   }

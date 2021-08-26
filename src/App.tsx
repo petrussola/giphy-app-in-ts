@@ -11,12 +11,12 @@ import SafeToggle from "./components/SafeToggle";
 
 import { GIFObject } from "giphy-api";
 
-import { Page } from "./types";
+import { Page, AppModeType } from "./types";
 
 function App() {
   const [data, setData] = useState<GIFObject[]>([]);
   const [page, setPage] = useState<Page>({ trending: 0, search: 0 });
-  const [appMode, setAppMode] = useState<string>("trending");
+  const [appMode, setAppMode] = useState<AppModeType>("trending");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [safeSearch, setSafeSearch] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);

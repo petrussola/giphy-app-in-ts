@@ -1,7 +1,19 @@
 import React from "react";
 import { FormControl, Switch, FormLabel } from "@chakra-ui/react";
 
-export default function SafeToggle({ setPage, setSafeSearch, safeSearch }) {
+import { Page } from "../types";
+
+interface Props {
+  setPage: React.Dispatch<React.SetStateAction<Page>>;
+  setSafeSearch: React.Dispatch<React.SetStateAction<boolean>>;
+  safeSearch: boolean;
+}
+
+export default function SafeToggle({
+  setPage,
+  setSafeSearch,
+  safeSearch,
+}: Props) {
   const safeChangeHandler = () => {
     setPage({ trending: 0, search: 0 });
     setSafeSearch((safeSearch) => !safeSearch);

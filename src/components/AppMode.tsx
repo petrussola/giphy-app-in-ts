@@ -1,7 +1,21 @@
 import React from "react";
 import { Box, Text, Button } from "@chakra-ui/react";
 
-export default function AppMode({ appMode, searchTerm, setAppMode, setPage }) {
+import { Page, AppModeType } from "../types";
+
+interface Props {
+  appMode: string;
+  searchTerm: string;
+  setAppMode: React.Dispatch<React.SetStateAction<AppModeType>>;
+  setPage: React.Dispatch<React.SetStateAction<Page>>;
+}
+
+export default function AppMode({
+  appMode,
+  searchTerm,
+  setAppMode,
+  setPage,
+}: Props) {
   const handleReturnTrending = () => {
     setAppMode("trending");
     setPage({ trending: 0, search: 0 });

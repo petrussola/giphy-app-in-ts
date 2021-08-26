@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Image, Skeleton } from "@chakra-ui/react";
+import { GIFObject } from "giphy-api";
 
-export default function SearchItem({ item }) {
+interface Props {
+  item: GIFObject
+}
+
+export default function SearchItem({ item }: Props) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const handleLoadImage = () => {

@@ -1,9 +1,14 @@
 import React from "react";
 import { SimpleGrid, Spinner } from "@chakra-ui/react";
+import { GIFObject } from "giphy-api";
 
 import SearchItem from "./SearchItem";
 
-export default function SearchResults({ data }) {
+interface Props {
+  data: GIFObject[]
+}
+
+export default function SearchResults({ data }: Props) {
   if (!data) {
     return <Spinner />;
   }

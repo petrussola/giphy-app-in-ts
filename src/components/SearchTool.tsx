@@ -8,12 +8,12 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
-import { Page, SearchEvent } from "../types";
+import { Page, SearchEvent, AppModeType } from "../types";
 
 interface Props {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-  setAppMode: React.Dispatch<React.SetStateAction<string>>;
-  appMode: string;
+  setAppMode: React.Dispatch<React.SetStateAction<AppModeType>>;
+  appMode: AppModeType;
   setPage: React.Dispatch<React.SetStateAction<Page>>;
 }
 
